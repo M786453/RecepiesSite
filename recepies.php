@@ -57,7 +57,7 @@ function redirectLogin(){
 <body>
     <div class="recipe__container">
         <nav>
-            <a href="index.html" style="color: black;">RECIPES</a>
+            <a href="index.html" style="color: black;">RECIPES <img id='fork' src='./assets/icons/fork.png' width='20'/></a>
             <div>
                 <a href="contact.php" style="background-color: black; color: white;">Contact</a>
                 <a href="logout.php" style="background-color: black; color: white;">Logout</a>
@@ -84,4 +84,5 @@ function redirectLogin(){
         ?>
     </div>
 </body>
+<script src='./js/script.js'></script>
 </html>

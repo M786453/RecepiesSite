@@ -140,6 +140,7 @@ nav div a {
     flex-direction: column;
     color: black !important;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 .recipe__card h3{
