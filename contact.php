@@ -31,11 +31,13 @@
             <h1>Contact Us</h1>
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25157.21213208765!2d-100.87639520996892!3d37.985261218671575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8709ee192f0ad66d%3A0x98205acce71ef74e!2sPapa%20Johns%20Pizza!5e0!3m2!1sen!2s!4v1685886016753!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             <div>
-                <a href="https://www.facebook.com" target="_blank"><img src="./assets/icons/facebook.png" width='50'/></a>
-                <a href="https://www.instagram.com" target="_blank"><img src="./assets/icons/instagram.png" width='50'/></a>
-                <a href="https://www.twitter.com" target="_blank"><img src="./assets/icons/twitter.png" width='50'/></a>
+                <a href="https://www.facebook.com" target="_blank"><img src="./assets/icons/facebook.png" width='40'/></a>
+                <a href="https://www.instagram.com" target="_blank"><img src="./assets/icons/instagram.png" width='40'/></a>
+                <a href="https://www.twitter.com" target="_blank"><img src="./assets/icons/twitter.png" width='40'/></a>
+                <a href="#" id="phone"><img src="./assets/icons/phone.png" width='50'/></a>
+                <script src='./js/clipcopy.js'></script>
             </div>
-            <p>Call Us At : +0123456789</p>
+            
         </div>
     </div>
 </body>

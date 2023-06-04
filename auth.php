@@ -74,6 +74,8 @@ function register($conn) {
 
     if ($conn->query($sql) === true) {
         // return "Registration successful!";
+        // Log User registration 
+        file_put_contents('log.txt', $name." is registered with email '".$email."' at ".date('Y-m-d H:i:s').".\n", FILE_APPEND);
         // redirect user to login page
         header("Location: /recepies/login.php");
         exit;
@@ -107,8 +109,11 @@ function login($conn){
         // Verify the entered password with the hashed password
         if (md5($password) === $storedPassword) {
             // return "Login successful!";
+            // Log User registration 
+            file_put_contents('log.txt', $username." is logged in at ".date('Y-m-d H:i:s').".\n", FILE_APPEND);
             // redirect user to recepies page
             $_SESSION["isLogedIn"] = true;
+            $_SESSION['username'] = $username;
             redirectRecepies();
         } else {
             return "Incorrect password!";
