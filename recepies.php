@@ -17,8 +17,10 @@ $conn = createConnectionToMySql();
 // Create recepies table
 createRecepiesTable($conn);
 
-// Close database connection
-$conn->close();
+// Get recepies Data
+// getRecepies($conn);
+
+
 
 // Create Recepies Table
 function createRecepiesTable($conn){
@@ -39,6 +41,11 @@ function createRecepiesTable($conn){
         // Handle any errors that occur during execution
     }
 }
+
+// Get Recepies Data
+// function getRecepies($conn){
+ 
+// }
 
 // redirect to login page
 function redirectLogin(){
@@ -65,56 +72,30 @@ function redirectLogin(){
                 <a href="logout.php" style="background-color: black; color: white;">Logout</a>
             </div>
         </nav>
-        <div class="recipe__card">
+        <?php
+               $sql = "SELECT * FROM recepies";
+
+               $result = $conn->query($sql);
+           
+               if (mysqli_num_rows($result) > 0) {
+                   // Output data of each row
+                   while ($row = mysqli_fetch_assoc($result)) {
+                       echo "<div class='recipe__card'>";
+                       echo "<img src='".$row['img_url']."' alt='img'>";
+                       echo "<h3>".$row['name']."</h3>";
+                       echo "<p>".$row['description']."</p>";
+                       echo "</div>";
+                   }
+               } 
+
+               // Close database connection
+                $conn->close();
+        ?>
+        <!-- <div class="recipe__card">
             <img src="./assets/food.jpg" alt="img">
             <h3>Recipe Name</h3>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea, quos? Necessitatibus nihil reprehenderit numquam? Maiores, repellat atque quidem optio voluptatem porro enim consequatur odio ipsam, sapiente iure libero nemo? Veritatis!</p>
-        </div>
-        <div class="recipe__card">
-            <img src="./assets/food.jpg" alt="img">
-            <h3>Recipe Name</h3>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea, quos? Necessitatibus nihil reprehenderit numquam? Maiores, repellat atque quidem optio voluptatem porro enim consequatur odio ipsam, sapiente iure libero nemo? Veritatis!</p>
-        </div>
-        <div class="recipe__card">
-            <img src="./assets/food.jpg" alt="img">
-            <h3>Recipe Name</h3>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea, quos? Necessitatibus nihil reprehenderit numquam? Maiores, repellat atque quidem optio voluptatem porro enim consequatur odio ipsam, sapiente iure libero nemo? Veritatis!</p>
-        </div>
-        <div class="recipe__card">
-            <img src="./assets/food.jpg" alt="img">
-            <h3>Recipe Name</h3>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea, quos? Necessitatibus nihil reprehenderit numquam? Maiores, repellat atque quidem optio voluptatem porro enim consequatur odio ipsam, sapiente iure libero nemo? Veritatis!</p>
-        </div>
-        <div class="recipe__card">
-            <img src="./assets/food.jpg" alt="img">
-            <h3>Recipe Name</h3>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea, quos? Necessitatibus nihil reprehenderit numquam? Maiores, repellat atque quidem optio voluptatem porro enim consequatur odio ipsam, sapiente iure libero nemo? Veritatis!</p>
-        </div>
-        <div class="recipe__card">
-            <img src="./assets/food.jpg" alt="img">
-            <h3>Recipe Name</h3>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea, quos? Necessitatibus nihil reprehenderit numquam? Maiores, repellat atque quidem optio voluptatem porro enim consequatur odio ipsam, sapiente iure libero nemo? Veritatis!</p>
-        </div>
-        <div class="recipe__card">
-            <img src="./assets/food.jpg" alt="img">
-            <h3>Recipe Name</h3>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea, quos? Necessitatibus nihil reprehenderit numquam? Maiores, repellat atque quidem optio voluptatem porro enim consequatur odio ipsam, sapiente iure libero nemo? Veritatis!</p>
-        </div>
-        <div class="recipe__card">
-            <img src="./assets/food.jpg" alt="img">
-            <h3>Recipe Name</h3>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea, quos? Necessitatibus nihil reprehenderit numquam? Maiores, repellat atque quidem optio voluptatem porro enim consequatur odio ipsam, sapiente iure libero nemo? Veritatis!</p>
-        </div>
-        <div class="recipe__card">
-            <img src="./assets/food.jpg" alt="img">
-            <h3>Recipe Name</h3>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea, quos? Necessitatibus nihil reprehenderit numquam? Maiores, repellat atque quidem optio voluptatem porro enim consequatur odio ipsam, sapiente iure libero nemo? Veritatis!</p>
-        </div>
-        <div class="recipe__card">
-            <img src="./assets/food.jpg" alt="img">
-            <h3>Recipe Name</h3>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea, quos? Necessitatibus nihil reprehenderit numquam? Maiores, repellat atque quidem optio voluptatem porro enim consequatur odio ipsam, sapiente iure libero nemo? Veritatis!</p>
-        </div>
+        </div> -->
     </div>
 </body>
 </html>
