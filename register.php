@@ -1,3 +1,5 @@
+<?php include 'auth.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,15 +20,15 @@
                 <a href="register.html">Register</a>
             </div>
         </nav>
-        <?php echo "<h1>Hello World</h1>"; ?>
-        <form class="custom__form" action="">
+        <form class="custom__form" method="POST" action="">
             <h2>Register</h2>
-            <input placeholder="Email"/>
-            <input placeholder="Username"/>
-            <input placeholder="Password"/>
-            <input placeholder="Confirm Password"/>
+            <input type="text" name="email" placeholder="Email"/>
+            <input type="text" name="username" placeholder="Username"/>
+            <input type="password" name="password" placeholder="Password"/>
+            <!-- <input type="password" name="confirm_password" placeholder="Confirm Password"/> -->
             <button type="submit" name="register" value="Register">Register</button>
             <p>Already have an account? <a href="login.html">Login</a></p>
+            <p><?php echo $status; ?></p>
         </form>
     </main>
 </body>

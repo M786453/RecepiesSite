@@ -13,7 +13,7 @@ $status = ""; //variable to store login status
 if (isset($_POST['login'])){
     $status = login($conn);
 }else if(isset($_POST['register'])){
-    register($conn);
+    $status = register($conn);
 }
 
 // Close the database connection
@@ -41,23 +41,25 @@ function createUsersTable($conn){
 // User registration
 function register($conn) {
 
-    $name = $_POST['name'];
+    $name = $_POST['username'];
     $email = $_POST['email'];
     $password = $conn->real_escape_string($_POST['password']);
 
+     // Retrieve user data from the database
+     $sql = "SELECT * FROM users WHERE username = '$name' OR email = '$email'";
 
-    // Hash the password (for security)
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-    // Insert user data into the database
-    // $sql = "INSERT INTO users (username, email, password) VALUES ('$name', '$email', '$hashedPassword')";
+     $result = $conn->query($sql);
+ 
+     if ($result->num_rows > 0) {
+        return "Username/Email already exists.";
+     }
 
     $sql = "INSERT INTO users (username, email, password) VALUES ('$name', '$email', '$password')";
 
     if ($conn->query($sql) === true) {
-        echo "Registration successful!";
+        return "Registration successful!";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        return "Error: " . $sql . "<br>" . $conn->error;
     }
     
 }
