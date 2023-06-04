@@ -16,8 +16,8 @@
             <a href="index.html">RECIPES</a>
             <div>
                 <a href="contact.html">Contact</a>
-                <a href="login.html">Login</a>
-                <a href="register.html">Register</a>
+                <a href="login.php">Login</a>
+                <a href="register.php">Register</a>
             </div>
         </nav>
         <form class="custom__form" method="POST" action="">
@@ -25,9 +25,8 @@
             <input type="text" name="email" placeholder="Email"/>
             <input type="text" name="username" placeholder="Username"/>
             <input type="password" name="password" placeholder="Password"/>
-            <!-- <input type="password" name="confirm_password" placeholder="Confirm Password"/> -->
             <button type="submit" name="register" value="Register">Register</button>
-            <p>Already have an account? <a href="login.html">Login</a></p>
+            <p>Already have an account? <a href="login.php">Login</a></p>
             <p><?php echo $status; ?></p>
         </form>
     </main>

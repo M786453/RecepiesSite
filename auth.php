@@ -2,6 +2,15 @@
 
 include "connect.php";
 
+// Start user session
+session_start();
+
+// check login status
+if(isset($_SESSION["isLogedIn"]) && $_SESSION["isLogedIn"] == true){
+    // If user is already logedIn redirect to recepies page.
+    redirectRecepies();
+}
+
 // Create connection with databasse
 $conn = createConnectionToMySql();
 
@@ -45,6 +54,11 @@ function register($conn) {
     $email = $_POST['email'];
     $password = $conn->real_escape_string($_POST['password']);
 
+
+    if($name == "" || $email == "" || $password == ""){
+        return "Atleast one input is empty.";
+    }
+
      // Retrieve user data from the database
      $sql = "SELECT * FROM users WHERE username = '$name' OR email = '$email'";
 
@@ -57,7 +71,11 @@ function register($conn) {
     $sql = "INSERT INTO users (username, email, password) VALUES ('$name', '$email', '$password')";
 
     if ($conn->query($sql) === true) {
-        return "Registration successful!";
+        // return "Registration successful!";
+        // redirect user to login page
+        $_SESSION['isLogedIn'] = true;
+        header("Location: /recepies/login.php");
+        exit;
     } else {
         return "Error: " . $sql . "<br>" . $conn->error;
     }
@@ -71,6 +89,11 @@ function login($conn){
     $username = $_POST['username'];
     $password = $_POST['password'];
 
+    if($username == "" || $password == ""){
+        return "Username/Password is empty.";
+    }
+
+
     // Retrieve user data from the database
     $sql = "SELECT * FROM users WHERE username = '$username'";
 
@@ -83,7 +106,10 @@ function login($conn){
 
         // Verify the entered password with the hashed password
         if ($password === $storedPassword) {
-            return "Login successful!";
+            // return "Login successful!";
+            // redirect user to recepies page
+            $_SESSION["isLogedIn"] = true;
+            redirectRecepies();
         } else {
             return "Incorrect password!";
         }
@@ -91,5 +117,12 @@ function login($conn){
     } else {
         return "User not found!";
     }
+}
+
+
+// redirect to recepies page
+function redirectRecepies(){
+    header("Location: /recepies/recepies.php");
+    exit;
 }
 ?>

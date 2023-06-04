@@ -1,3 +1,52 @@
+<?php
+
+include "connect.php";
+
+session_start();
+
+// check login status
+if(!isset($_SESSION["isLogedIn"])){
+    // If user is already logedIn redirect to recepies page.
+    redirectLogin();
+}
+
+
+// Create connection with databasse
+$conn = createConnectionToMySql();
+
+// Create recepies table
+createRecepiesTable($conn);
+
+// Close database connection
+$conn->close();
+
+// Create Recepies Table
+function createRecepiesTable($conn){
+    $sql = "CREATE TABLE IF NOT EXISTS recepies (
+        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(50) NOT NULL,
+        description VARCHAR(200) NOT NULL,
+        img_url VARCHAR(100) NOT NULL,
+        ingredients JSON NOT NULL,
+        category VARCHAR(30) NOT NULL
+    )";
+   
+    $stmt = $conn->prepare($sql);
+    
+    try{
+        $stmt->execute();
+    } catch(PDOException $e){
+        // Handle any errors that occur during execution
+    }
+}
+
+// redirect to login page
+function redirectLogin(){
+    header("Location: /recepies/login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +62,7 @@
             <a href="index.html" style="color: black;">RECIPES</a>
             <div>
                 <a href="contact.html" style="background-color: black; color: white;">Contact</a>
-                <a href="login.html" style="background-color: black; color: white;">Logout</a>
+                <a href="logout.php" style="background-color: black; color: white;">Logout</a>
             </div>
         </nav>
         <div class="recipe__card">
