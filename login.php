@@ -15,7 +15,7 @@
         <nav>
             <a href="index.html">RECIPES</a>
             <div>
-                <a href="contact.html">Contact</a>
+                <a href="contact.php">Contact</a>
                 <a href="login.php">Login</a>
                 <a href="register.php">Register</a>
             </div>

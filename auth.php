@@ -35,7 +35,7 @@ function createUsersTable($conn){
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         username VARCHAR(30) NOT NULL,
         email VARCHAR(30) NOT NULL,
-        password VARCHAR(30) NOT NULL
+        password VARCHAR(40) NOT NULL
         )";
    
     $stmt = $conn->prepare($sql);
@@ -68,12 +68,13 @@ function register($conn) {
         return "Username/Email already exists.";
      }
 
-    $sql = "INSERT INTO users (username, email, password) VALUES ('$name', '$email', '$password')";
+     $hashedPassword = md5($password);
+
+    $sql = "INSERT INTO users (username, email, password) VALUES ('$name', '$email', '$hashedPassword')";
 
     if ($conn->query($sql) === true) {
         // return "Registration successful!";
         // redirect user to login page
-        $_SESSION['isLogedIn'] = true;
         header("Location: /recepies/login.php");
         exit;
     } else {
@@ -103,9 +104,8 @@ function login($conn){
 
         $row = $result->fetch_assoc();
         $storedPassword = $row['password'];
-
         // Verify the entered password with the hashed password
-        if ($password === $storedPassword) {
+        if (md5($password) === $storedPassword) {
             // return "Login successful!";
             // redirect user to recepies page
             $_SESSION["isLogedIn"] = true;
@@ -122,7 +122,7 @@ function login($conn){
 
 // redirect to recepies page
 function redirectRecepies(){
-    header("Location: /recepies/recepies.php");
+    header("Location: ./recepies.php");
     exit;
 }
 ?>

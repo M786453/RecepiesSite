@@ -6,7 +6,7 @@ session_start();
 
 // check login status
 if(!isset($_SESSION["isLogedIn"])){
-    // If user is already logedIn redirect to recepies page.
+    // If user is not logged in, redirect to login page
     redirectLogin();
 }
 
@@ -16,11 +16,6 @@ $conn = createConnectionToMySql();
 
 // Create recepies table
 createRecepiesTable($conn);
-
-// Get recepies Data
-// getRecepies($conn);
-
-
 
 // Create Recepies Table
 function createRecepiesTable($conn){
@@ -42,10 +37,6 @@ function createRecepiesTable($conn){
     }
 }
 
-// Get Recepies Data
-// function getRecepies($conn){
- 
-// }
 
 // redirect to login page
 function redirectLogin(){
@@ -68,7 +59,7 @@ function redirectLogin(){
         <nav>
             <a href="index.html" style="color: black;">RECIPES</a>
             <div>
-                <a href="contact.html" style="background-color: black; color: white;">Contact</a>
+                <a href="contact.php" style="background-color: black; color: white;">Contact</a>
                 <a href="logout.php" style="background-color: black; color: white;">Logout</a>
             </div>
         </nav>
@@ -91,11 +82,6 @@ function redirectLogin(){
                // Close database connection
                 $conn->close();
         ?>
-        <!-- <div class="recipe__card">
-            <img src="./assets/food.jpg" alt="img">
-            <h3>Recipe Name</h3>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea, quos? Necessitatibus nihil reprehenderit numquam? Maiores, repellat atque quidem optio voluptatem porro enim consequatur odio ipsam, sapiente iure libero nemo? Veritatis!</p>
-        </div> -->
     </div>
 </body>
 </html>
