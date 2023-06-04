@@ -8,8 +8,10 @@ $conn = createConnectionToMySql();
 // Create Users table in database if not already exists
 createUsersTable($conn);
 
+$status = ""; //variable to store login status
+
 if (isset($_POST['login'])){
-    login($conn);
+    $status = login($conn);
 }else if(isset($_POST['register'])){
     register($conn);
 }
@@ -64,44 +66,28 @@ function register($conn) {
 // User login
 function login($conn){
 
-    $email = $_POST['email'];
+    $username = $_POST['username'];
     $password = $_POST['password'];
 
-    echo $password;
     // Retrieve user data from the database
-    $sql = "SELECT * FROM users WHERE email = '$email'";
+    $sql = "SELECT * FROM users WHERE username = '$username'";
 
     $result = $conn->query($sql);
 
     if ($result->num_rows === 1) {
 
         $row = $result->fetch_assoc();
-        $hashedPassword = $row['password'];
+        $storedPassword = $row['password'];
 
         // Verify the entered password with the hashed password
-        if ($password === $hashedPassword) {
-            echo "Login successful!";
+        if ($password === $storedPassword) {
+            return "Login successful!";
         } else {
-            echo "Incorrect password!";
+            return "Incorrect password!";
         }
 
     } else {
-        echo "User not found!";
+        return "User not found!";
     }
 }
 ?>
-
-<!-- HTML form for registration -->
-<form method="POST" action="">
-    <input type="text" name="name" placeholder="Name" required><br>
-    <input type="email" name="email" placeholder="Email" required><br>
-    <input type="password" name="password" placeholder="Password" required><br>
-    <input type="submit" name="register" value="Register">
-</form>
-
-<!-- HTML form for login -->
-<form method="POST" action="">
-    <input type="email" name="email" placeholder="Email" required><br>
-    <input type="password" name="password" placeholder="Password" required><br>
-    <input type="submit" name="login" value="Login">
-</form>

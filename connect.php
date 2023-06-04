@@ -12,7 +12,7 @@ function createConnectionToMySql(){
             die("Connected Failed." . $conn.connect_error);
         }
 
-        echo "Connected to database successfully.";
+        // echo "Connected to database successfully.";
 
         return $conn;
     } catch(Exception $e) {
